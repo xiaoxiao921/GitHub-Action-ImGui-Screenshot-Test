@@ -23,7 +23,7 @@ jobs:
     - name: Run example and take screenshot
       run: |
         export DISPLAY=:99
-        xvfb-run -a ./build/example_glfw_opengl3/example_glfw_opengl3 &
+        xvfb-run -a ./imgui/examples/example_glfw_opengl3/example_glfw_opengl3 &
         sleep 5
         import -window root screenshot.png
 
