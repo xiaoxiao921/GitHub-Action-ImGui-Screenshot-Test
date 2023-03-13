@@ -17,9 +17,7 @@ jobs:
 
     - name: Build example
       run: |
-        mkdir build
-        cd build
-        cmake ../imgui/examples/example_glfw_opengl3/
+        cd imgui/examples/example_glfw_opengl3
         make
 
     - name: Run example and take screenshot
