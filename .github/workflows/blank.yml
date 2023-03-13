@@ -19,13 +19,12 @@ jobs:
       run: |
         cd imgui/examples/example_glfw_opengl3
         make
-
+        
     - name: Run example and take screenshot
-      run: |
-        export DISPLAY=:99
-        xvfb-run -a ./imgui/examples/example_glfw_opengl3/example_glfw_opengl3 &
-        sleep 5
-        import -window root screenshot.png
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        run: ./example_glfw_opengl3 & sleep 5 & import -window root screenshot.png
+        working-directory: ./imgui/examples/example_glfw_opengl3/
 
     - name: Upload screenshot artifact
       uses: actions/upload-artifact@v2
