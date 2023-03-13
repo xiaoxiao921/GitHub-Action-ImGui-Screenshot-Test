@@ -6,7 +6,7 @@ jobs:
   build-and-run:
     runs-on: ubuntu-latest
     env:
-      DISPLAY: :0
+      DISPLAY: :1
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -28,23 +28,25 @@ jobs:
         
         sudo apt-get install -y xvfb libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0
         
-        # start xvfb on (default) display :0
-        sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
+        Xvfb $DISPLAY &
+        sleep 10
         
     - name: start imgui app
       run: |
         set -x
         
         ./imgui/examples/example_glfw_opengl3/example_glfw_opengl3 &
-
-
-        sleep 5
         
-        import -window root screenshot.png
+        sleep 10
+        
+        import -pause 1 -window root screenshot.jpg
+        
+        killall example_glfw_opengl3
+        killall Xvfb
         
 
     - name: Upload screenshot artifact
       uses: actions/upload-artifact@v2
       with:
-        name: screenshot
-        path: screenshot.png
+        name: screenshot.jpg
+        path: screenshot.jpg
