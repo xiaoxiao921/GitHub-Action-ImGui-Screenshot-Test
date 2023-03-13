@@ -35,9 +35,9 @@ jobs:
       run: |
         set -x
         
-        cd imgui/examples/example_glfw_opengl3
-        ./example_glfw_opengl3 &
-        
+        ./imgui/examples/example_glfw_opengl3/example_glfw_opengl3 &
+
+
         sleep 5
         
         import -window root screenshot.png
