@@ -12,11 +12,14 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install -y cmake libglfw3-dev xvfb imagemagick
 
+    - name: Clone ImGui repository
+      run: git clone https://github.com/ocornut/imgui.git
+
     - name: Build example
       run: |
         mkdir build
         cd build
-        cmake ../examples/example_glfw_opengl3/
+        cmake ../imgui/examples/example_glfw_opengl3/
         make
 
     - name: Run example and take screenshot
@@ -26,7 +29,7 @@ jobs:
         sleep 5
         import -window root screenshot.png
 
-    - name: Upload screenshot as artifact
+    - name: Upload screenshot artifact
       uses: actions/upload-artifact@v2
       with:
         name: screenshot
